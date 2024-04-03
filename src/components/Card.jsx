@@ -2,6 +2,7 @@ import React from 'react'
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import axios from 'axios';
+import EditTask from './EditTask';
 // import db from '../../db.json'
 
 function Card(props) {
@@ -27,7 +28,8 @@ function Card(props) {
       <p>Discription: {discription}</p>
       <p>Status: {status}</p>
       <div className='flex justify-between mt-3'>
-        <button className='bg-blue-400 py-1 px-4 rounded-md hover:bg-yellow-200'><FaEdit/></button>
+        {/* <button className='bg-blue-400 py-1 px-4 rounded-md hover:bg-yellow-200'><FaEdit/></button> */}
+        {/* <EditTask/> */}
         <button onClick={()=>handleDelete(id)} className='bg-red-600 py-1 px-4 rounded-md hover:bg-red-400'><MdDelete/></button>
       </div>
     </div>

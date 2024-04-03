@@ -1,88 +1,34 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React from 'react'
 import {
-  Button,
   useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  Input,
   ModalCloseButton,
   ModalBody,
-  FormControl,
-  FormLabel,
   ModalFooter,
 } from "@chakra-ui/react";
+import { FaEdit } from 'react-icons/fa';
 
-function reducer(state,action) {
-  switch (action.type) {
-    case "title": {
-      // console.log(action)
-      return {...state,[action.payload]:action.value};
-    }
-    case "discription":{
-
-      return {...state,[action.payload]:action.value}
-    }
-    case "status":{
-      return {...state,[action.payload]:action.value}
-    }
-  }
-}
-function AddTask() {
-  const [state, dispatch] = useReducer(reducer, {
-    title: "",
-    discription: "",
-    status: "",
-  });
-  // console.log(state)
+function EditTask() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const [data,setData]=useState({})
-  // console.log(data)
-
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
-  function handleChange(e) {
-    const {value,name} = e.target
-    dispatch({
-      type: name,
-      payload:name,value
-    });
+
+  async function editTask(){
+     onOpen()
   }
-  function handleClick(e) {
-    e.preventDefault();
-    // console.log(state)
-    setData(state)
-    const postData=async()=>{
-      try {
-        let senddata = await fetch('http://localhost:8080/data', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(state),
-        })
-      } catch (error) {
-        console.log(error)
-        
-      }
-    }
-
-    postData()
-    onClose();
-  }
-
-
   return (
     <>
       <div className="text-center my-5">
-        <button
+        {/* <button
           onClick={onOpen}
           className=" text-lg hover:bg-red-400 bg-blue-200 p-2 rounded-md"
         >
-          Add New Task
-        </button>
+          Edit Task
+        </button> */}
+        <button  onClick={editTask} className='bg-blue-400 py-1 px-4 rounded-md hover:bg-yellow-400'><FaEdit/></button>
       </div>
       <Modal
         initialFocusRef={initialRef}
@@ -92,7 +38,7 @@ function AddTask() {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create your new task</ModalHeader>
+          <ModalHeader>Edit your task</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             {/* <FormControl>
@@ -152,7 +98,7 @@ function AddTask() {
         </ModalContent>
       </Modal>
     </>
-  );
+  )
 }
 
-export default AddTask;
+export default EditTask
